@@ -15,8 +15,8 @@ const store = new Vuex.Store({
       {id: 4, parentId: "main", name: 'Влад', phone: '8 923 432 12 32', children: []},
       {id: 5, parentId: "main", name: 'Саша', phone: '8 923 432 12 32', children: []},
     ]
-
   }),
+
   getters: {
     users: state => state.tableData
   },
@@ -56,8 +56,6 @@ const store = new Vuex.Store({
       }
     }
   },
-
-  actions: {}
 })
 
 store.subscribe((mutation, state) => {

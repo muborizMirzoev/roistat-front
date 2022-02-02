@@ -1,5 +1,4 @@
 <template>
-
   <el-dialog title="Добавление пользователя" :visible="formVisible" @close="$emit('close')">
     <el-form
       ref="ruleForm"
@@ -28,7 +27,6 @@
       <el-button @click="saveFormData" round type="primary">Сохранить</el-button>
     </span>
   </el-dialog>
-
 </template>
 
 <script>
@@ -43,7 +41,8 @@ export default {
     }
   },
   emits: ['close'],
-  data () {
+
+  data() {
     return {
       labelPosition: 'right',
       form: {
@@ -57,7 +56,7 @@ export default {
           {required: true, message: 'Пожалуйста ведите имя', trigger: blur}
         ],
         phone: [
-          {required: true, message: 'Пожалуйста ведите Телефон', trigger: blur}
+          {required: true, message: 'Пожалуйста ведите Телефон', trigger: blur},
         ],
         parent: [
           {required: true, message: 'Пожалуйста выберите начальника', trigger: blur}
@@ -71,7 +70,7 @@ export default {
   },
 
   methods: {
-    findAllParents (users) {
+    findAllParents(users) {
       users.forEach((user) => {
         if (user.children) {
           this.allParents.push(user)
@@ -81,8 +80,7 @@ export default {
         }
       })
     },
-
-    saveFormData () {
+    saveFormData() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
           const user = {
@@ -104,12 +102,10 @@ export default {
       })
     }
   },
-  mounted () {
+
+  mounted() {
     this.findAllParents(this.users)
   }
 }
 </script>
 
-<style scoped>
-
-</style>
