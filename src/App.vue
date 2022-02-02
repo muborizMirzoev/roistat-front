@@ -27,7 +27,6 @@ export default {
 
   methods: {
     openModal() {
-      console.log('sss')
       this.showModal = true
     },
     closeModal() {
