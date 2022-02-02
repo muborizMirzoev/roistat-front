@@ -7,7 +7,13 @@ const store = new Vuex.Store({
     tableData: [
       {
         id: 1, parentId: "main", name: 'Марина', phone: '8 923 432 12 31', children: [
-          {id: 6, parentId: 1, name: 'Виктория', phone: '8 923 233 11 11', children: []}
+          {
+            id: 6, parentId: 1, name: 'Виктория', phone: '8 923 233 11 11', children: [
+              {id: 7, parentId: 6, name: 'Маша', phone: '8 923 113 11 22', children: []}
+            ]
+          },
+          {id: 8, parentId: 1, name: 'Андрей', phone: '8 923 103 11 11', children: []},
+          {id: 9, parentId: 1, name: 'Иван', phone: '8 923 103 11 10', children: []}
         ]
       },
       {id: 2, parentId: "main", name: 'Сергей', phone: '8 923 432 11 32', children: []},
@@ -45,6 +51,43 @@ const store = new Vuex.Store({
           }
         }
         return result
+      }
+    },
+
+    sortUsers({tableData}, {prop, order}) {
+      if (!order) return
+
+      if (order === 'ascending') {
+        tableData.sort(ascendingSort);
+      }
+      if (order === 'descending') {
+        tableData.sort(descendingSort);
+      }
+
+      function ascendingSort(a, b) {
+        if (a.children.length > 1) {
+          a.children.sort(ascendingSort);
+        }
+        if (a[prop] < b[prop]) {
+          return -1;
+        }
+        if (a[prop] > b[prop]) {
+          return 1;
+        }
+        return 0;
+      }
+
+      function descendingSort(a, b) {
+        if (a.children.length > 1) {
+          a.children.sort(descendingSort);
+        }
+        if (a[prop] > b[prop]) {
+          return -1;
+        }
+        if (a[prop] < b[prop]) {
+          return 1;
+        }
+        return 0;
       }
     },
 
